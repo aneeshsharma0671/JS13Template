@@ -7,7 +7,7 @@ import MoveObjectBehaviour from "./MoveObject";
 
 const Player: GameObject = new GameObject("Player", { x: 0, y: 0 }, [
   new CircleRenderer({ x: 0, y: 0 }, 100, "blue"),
-  new MoveObjectBehaviour(10), // Speed of 100 pixels per second
+  new MoveObjectBehaviour(1000),
 ]);
 
 const EnemySpawner: GameObject = new GameObject(

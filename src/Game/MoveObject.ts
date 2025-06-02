@@ -1,3 +1,4 @@
+import { Time } from "../GameEngine/Core/GameEngine";
 import GameObjectBehaviour from "../GameEngine/Core/GameObjectBehaviour";
 import { Renderer } from "../GameEngine/Core/renderer";
 import { Vector2 } from "../GameEngine/Types/HelperTypes";
@@ -62,8 +63,12 @@ export default class MoveObjectBehaviour extends GameObjectBehaviour {
 
     // Update GameObject's position
     this._gameObject.position = {
-      x: this._gameObject.position.x + moveDirection.x * this.speed,
-      y: this._gameObject.position.y + moveDirection.y * this.speed,
+      x:
+        this._gameObject.position.x +
+        moveDirection.x * this.speed * Time.deltaTime,
+      y:
+        this._gameObject.position.y +
+        moveDirection.y * this.speed * Time.deltaTime,
     };
   }
 

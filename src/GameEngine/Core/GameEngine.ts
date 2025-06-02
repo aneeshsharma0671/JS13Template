@@ -68,9 +68,7 @@ export default class GameEngine {
       console.error("GameEngine.start: No active scene to start.");
       return;
     }
-    this._activeScene.objects.forEach((object) => {
-      object.objectStart();
-    });
+    this._activeScene.sceneStart();
 
     this._gameLoop = new GameLoop(
       this.update.bind(this),
@@ -100,9 +98,7 @@ export default class GameEngine {
       console.warn("GameEngine.update: No active scene to update.");
       return;
     }
-    this._activeScene.objects.forEach((object) => {
-      object.objectUpdate();
-    });
+    this._activeScene.sceneUpdate();
   }
 
   render() {
@@ -111,9 +107,7 @@ export default class GameEngine {
       return;
     }
     Renderer.instance.clearCanvas();
-    this._activeScene.objects.forEach((object) => {
-      object.objectRender();
-    });
+    this._activeScene.sceneRender();
   }
 
   stopEngine() {
@@ -124,6 +118,10 @@ export default class GameEngine {
       this._gameLoop = null;
     }
   }
+}
+
+export class Time {
+  public static deltaTime: number = 0; // Time since the last frame in seconds
 }
 
 class GameLoop {
@@ -148,6 +146,7 @@ class GameLoop {
     this._accumulatedTime += deltaTime;
 
     while (this._accumulatedTime >= this._timeStep) {
+      Time.deltaTime = deltaTime / 1000; // Convert to seconds
       this._updateFunction(this._timeStep);
       this._accumulatedTime -= this._timeStep;
     }

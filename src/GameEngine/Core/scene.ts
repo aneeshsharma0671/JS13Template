@@ -27,4 +27,28 @@ export default class Scene {
       this._objects.splice(index, 1);
     }
   }
+
+  sceneStart(): void {
+    this._objects.forEach((object) => {
+      object.objectStart();
+    });
+  }
+
+  sceneUpdate(): void {
+    this._objects.forEach((object) => {
+      object.objectUpdate();
+    });
+  }
+
+  sceneRender(): void {
+    this._objects.forEach((object) => {
+      object.objectRender();
+    });
+  }
+
+  sceneDestroy(): void {
+    this._objects.forEach((object) => {
+      object.objectDestroy();
+    });
+  }
 }
