@@ -1,6 +1,12 @@
+import { Vector2 } from "../Types/HelperTypes";
+
 export class Renderer {
   private static _instance: Renderer | null = null;
-  public canvasCtx: CanvasRenderingContext2D | null = null;
+  private canvasCtx: CanvasRenderingContext2D | null = null;
+  private static readonly _canvasSize: Vector2 = { x: 0, y: 0 };
+  public static get CANVAS_SIZE(): Vector2 {
+    return Renderer._canvasSize;
+  }
 
   private constructor() {
     // Private constructor to prevent direct instantiation.
@@ -27,6 +33,11 @@ export class Renderer {
       console.error("Renderer.initialize: Failed to get 2D rendering context.");
       return false;
     }
+    Renderer.CANVAS_SIZE.x = canvas.width;
+    Renderer.CANVAS_SIZE.y = canvas.height;
+    console.log(
+      `Renderer initialized with size: ${Renderer.CANVAS_SIZE.x}x${Renderer.CANVAS_SIZE.y}`
+    );
     return true;
   }
 

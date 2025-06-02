@@ -1,4 +1,5 @@
 import GameObjectBehaviour from "../GameEngine/Core/GameObjectBehaviour";
+import { Renderer } from "../GameEngine/Core/renderer";
 import { Vector2 } from "../GameEngine/Types/HelperTypes";
 
 export default class MoveObjectBehaviour extends GameObjectBehaviour {
@@ -19,6 +20,10 @@ export default class MoveObjectBehaviour extends GameObjectBehaviour {
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keyup", this.handleKeyUp.bind(this));
     console.log("MoveObjectBehaviour started. Use WASD keys to move.");
+    this._gameObject.position = {
+      x: Renderer.CANVAS_SIZE.x / 2,
+      y: Renderer.CANVAS_SIZE.y / 2,
+    };
   }
 
   update(): void {

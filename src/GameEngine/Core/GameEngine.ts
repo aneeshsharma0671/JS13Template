@@ -39,9 +39,6 @@ export default class GameEngine {
 
     let isFull = false;
     document.onfullscreenchange = () => (isFull = !isFull);
-  }
-
-  init(scenes: Scene[]) {
     if (!this._canvasElement) {
       console.error("GameEngine.init: canvasElement is not initialized.");
       return;
@@ -51,7 +48,9 @@ export default class GameEngine {
       console.error("GameEngine.init: Renderer initialization failed.");
       return;
     }
+  }
 
+  init(scenes: Scene[]) {
     this._scenes = scenes;
     this._activeScene = scenes[0] || null;
 

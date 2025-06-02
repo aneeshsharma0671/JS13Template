@@ -17,17 +17,25 @@ export default class CircleRenderer extends GameObjectBehaviour {
   start(): void {
     super.start();
     this.renderCircle();
+    console.log(
+      `CircleRenderer: Circle rendered at (${
+        this._gameObject.position.x + this._center.x
+      }, ${this._gameObject.position.y + this._center.y}) with radius ${
+        this._radius
+      } and color ${this._color}`
+    );
   }
 
   private renderCircle(): void {
     Renderer.instance.DrawCircle(
-      this._center.x,
-      this._center.y,
+      this._gameObject.position.x + this._center.x,
+      this._gameObject.position.y + this._center.y,
       this._radius,
       this._color
     );
-    console.log(
-      `CircleRenderer: Circle rendered at (${this._center.x}, ${this._center.y}) with radius ${this._radius} and color ${this._color}`
-    );
+  }
+
+  render(): void {
+    this.renderCircle();
   }
 }

@@ -17,6 +17,9 @@ export default class GameObject {
     this._behaviours.forEach((behaviour) => {
       behaviour.gameObject = this;
     });
+    console.log(
+      `GameObject created: ${this._objectName} at position (${this._position.x}, ${this._position.y})`
+    );
   }
 
   public set position(pos: Vector2) {
