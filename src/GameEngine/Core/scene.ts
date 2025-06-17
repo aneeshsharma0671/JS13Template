@@ -17,11 +17,12 @@ export default class Scene {
     return this._objects;
   }
 
-  addObject(object: any) {
+  addObject(object: GameObject) {
     this._objects.push(object);
+    object.objectStart(); // Automatically start the object when added
   }
 
-  removeObject(object: any) {
+  removeObject(object: GameObject) {
     const index = this._objects.indexOf(object);
     if (index > -1) {
       this._objects.splice(index, 1);

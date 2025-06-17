@@ -29,9 +29,6 @@ export default class MoveObjectBehaviour extends GameObjectBehaviour {
 
   update(): void {
     super.update();
-    console.log(
-      "MoveObjectBehaviour update called." + this._gameObject?.objectName
-    );
     if (!this._gameObject) {
       // console.warn("MoveObjectBehaviour: GameObject or Transform not found.");
       return;

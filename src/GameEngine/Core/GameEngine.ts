@@ -1,12 +1,11 @@
 import { Vector2 } from "../Types/HelperTypes";
 import { Renderer } from "./renderer";
 import Scene from "./scene";
+import SceneManager from "./SceneManager";
 
 export default class GameEngine {
   private _canvasElement: HTMLCanvasElement | null = null;
   private _gameLoop: GameLoop | null = null;
-  private _scenes: Scene[] = [];
-  private _activeScene: Scene | null = null;
 
   constructor(canvasSize: Vector2) {
     const canvas: HTMLCanvasElement = document.createElement("canvas");
@@ -51,24 +50,20 @@ export default class GameEngine {
   }
 
   init(scenes: Scene[]) {
-    this._scenes = scenes;
-    this._activeScene = scenes[0] || null;
-
-    scenes.forEach((scene) => {
-      console.log(`Initializing scene: ${scene.name}`);
-      // Additional logic to initialize each scene can be added here
-    });
-
+    SceneManager.getInstance().addScene(scenes);
+    SceneManager.getInstance().setActiveScene(scenes[0].name);
     console.log("Game engine initialized with scenes.");
   }
 
   startEngine() {
     console.log("Game engine started.");
-    if (!this._activeScene) {
+    const activeScene = SceneManager.ActiveScene;
+
+    if (!activeScene) {
       console.error("GameEngine.start: No active scene to start.");
       return;
     }
-    this._activeScene.sceneStart();
+    activeScene.sceneStart();
 
     this._gameLoop = new GameLoop(
       this.update.bind(this),
@@ -94,20 +89,22 @@ export default class GameEngine {
   }
 
   update() {
-    if (!this._activeScene) {
+    const activeScene = SceneManager.ActiveScene;
+    if (!activeScene) {
       console.warn("GameEngine.update: No active scene to update.");
       return;
     }
-    this._activeScene.sceneUpdate();
+    activeScene.sceneUpdate();
   }
 
   render() {
-    if (!this._activeScene) {
+    const activeScene = SceneManager.ActiveScene;
+    if (!activeScene) {
       console.warn("GameEngine.render: No active scene to render.");
       return;
     }
     Renderer.instance.clearCanvas();
-    this._activeScene.sceneRender();
+    activeScene.sceneRender();
   }
 
   stopEngine() {
