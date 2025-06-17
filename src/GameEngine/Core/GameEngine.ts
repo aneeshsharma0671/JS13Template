@@ -58,7 +58,6 @@ export default class GameEngine {
   startEngine() {
     console.log("Game engine started.");
     const activeScene = SceneManager.ActiveScene;
-
     if (!activeScene) {
       console.error("GameEngine.start: No active scene to start.");
       return;

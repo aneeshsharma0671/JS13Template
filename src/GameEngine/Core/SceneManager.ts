@@ -1,3 +1,4 @@
+import GameObject from "./GameObject";
 import Scene from "./scene";
 
 export default class SceneManager {
@@ -57,5 +58,13 @@ export default class SceneManager {
 
   public getActiveScene(): Scene | null {
     return this.activeScene;
+  }
+
+  public AddObjectToActiveScene(object: GameObject): void {
+    if (!this.activeScene) {
+      console.error("SceneManager.AddObjectToActiveScene: No active scene.");
+      return;
+    }
+    this.activeScene.addObject(object);
   }
 }

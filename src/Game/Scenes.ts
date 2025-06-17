@@ -3,6 +3,7 @@ import RectRenderer from "../GameEngine/Behaviours/renderers/rectRenderer";
 import GameObject from "../GameEngine/Core/GameObject";
 import { Renderer } from "../GameEngine/Core/renderer";
 import Scene from "../GameEngine/Core/scene";
+import EnemySpawnerBehaviour from "./EnemySpawner";
 import MoveObjectBehaviour from "./MoveObject";
 
 const Player: GameObject = new GameObject("Player", { x: 0, y: 0 }, [
@@ -13,7 +14,7 @@ const Player: GameObject = new GameObject("Player", { x: 0, y: 0 }, [
 const EnemySpawner: GameObject = new GameObject(
   "EnemySpawner",
   { x: 0, y: 0 },
-  []
+  [new EnemySpawnerBehaviour(1000, 50, "red")]
 );
 
 const GameScene: Scene = new Scene("Main Scene", [Player, EnemySpawner]);
