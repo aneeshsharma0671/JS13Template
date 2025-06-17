@@ -8,20 +8,14 @@ import AutoDestroyBehaviour from "./AutoDestroy";
 
 export default class EnemySpawnerBehaviour extends GameObjectBehaviour {
   public spawnInterval: number; // Time in milliseconds
-  public enemyRadius: number;
-  public enemyColor: string;
+  private _enemyPrefab: GameObject; // Prefab for the enemy
   private timeSinceLastSpawn: number;
 
-  constructor(
-    spawnInterval: number = 5000,
-    enemyRadius: number = 10,
-    enemyColor: string = "red"
-  ) {
+  constructor(spawnInterval: number = 5000, enemyPrefab: GameObject) {
     super();
     this.spawnInterval = spawnInterval;
-    this.enemyRadius = enemyRadius;
-    this.enemyColor = enemyColor;
     this.timeSinceLastSpawn = 0;
+    this._enemyPrefab = enemyPrefab;
   }
 
   start(): void {
@@ -51,23 +45,14 @@ export default class EnemySpawnerBehaviour extends GameObjectBehaviour {
       y: Math.random() * Renderer.CANVAS_SIZE.y,
     };
 
-    const enemyBehaviours: GameObjectBehaviour[] = [
-      new CircleRenderer({ x: 0, y: 0 }, this.enemyRadius, this.enemyColor),
-      new AutoDestroyBehaviour(6),
-      // TODO: Add other enemy behaviours here (e.g., movement, health)
-    ];
-
-    const newEnemy = new GameObject(
-      `Enemy_${Date.now()}`, // Unique name for the enemy
-      spawnPosition,
-      enemyBehaviours
+    // Add the new enemy to the current scene
+    const obj: GameObject = this.InstantiateObject(
+      this._enemyPrefab,
+      spawnPosition
     );
 
-    // Add the new enemy to the current scene
-    this.InstantiateObject(newEnemy);
-
     console.log(
-      `Enemy spawned: ${newEnemy.objectName} at (${spawnPosition.x.toFixed(
+      `Enemy spawned: ${obj.objectName} at (${spawnPosition.x.toFixed(
         2
       )}, ${spawnPosition.y.toFixed(2)})`
     );

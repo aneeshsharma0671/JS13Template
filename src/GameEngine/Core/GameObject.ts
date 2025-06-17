@@ -34,6 +34,10 @@ export default class GameObject {
     return this._objectName;
   }
 
+  public get behaviours(): GameObjectBehaviour[] {
+    return this._behaviours;
+  }
+
   objectStart(): void {
     this._behaviours.forEach((behaviour) => {
       behaviour.start();

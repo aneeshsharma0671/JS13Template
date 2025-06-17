@@ -17,9 +17,10 @@ export default class Scene {
     return this._objects;
   }
 
-  addObject(object: GameObject) {
+  addObject(object: GameObject): void {
     this._objects.push(object);
     object.objectStart(); // Automatically start the object when added
+    object;
   }
 
   removeObject(object: GameObject) {
