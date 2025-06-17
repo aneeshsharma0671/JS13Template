@@ -27,4 +27,18 @@ export default class GameObjectBehaviour {
 
     SceneManager.getInstance().AddObjectToActiveScene(gameObject);
   }
+
+  protected DestroyObject(gameObject: GameObject): void {
+    if (!gameObject) {
+      console.error("GameObjectBehaviour.DestroyObject: GameObject is null.");
+      return;
+    }
+
+    const activeScene = SceneManager.getInstance().getActiveScene();
+    if (activeScene) {
+      activeScene.removeObject(gameObject);
+    } else {
+      console.error("GameObjectBehaviour.DestroyObject: No active scene.");
+    }
+  }
 }

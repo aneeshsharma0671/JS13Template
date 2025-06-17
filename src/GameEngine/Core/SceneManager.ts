@@ -67,4 +67,14 @@ export default class SceneManager {
     }
     this.activeScene.addObject(object);
   }
+
+  public RemoveObjectFromActiveScene(object: GameObject): void {
+    if (!this.activeScene) {
+      console.error(
+        "SceneManager.RemoveObjectFromActiveScene: No active scene."
+      );
+      return;
+    }
+    this.activeScene.removeObject(object);
+  }
 }

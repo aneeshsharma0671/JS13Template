@@ -23,6 +23,11 @@ export default class Scene {
   }
 
   removeObject(object: GameObject) {
+    if (!object) {
+      console.error("Scene.removeObject: Object is null.");
+      return;
+    }
+    object.objectDestroy(); // Call destroy before removing
     const index = this._objects.indexOf(object);
     if (index > -1) {
       this._objects.splice(index, 1);

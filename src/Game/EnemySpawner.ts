@@ -4,6 +4,7 @@ import GameObject from "../GameEngine/Core/GameObject";
 import GameObjectBehaviour from "../GameEngine/Core/GameObjectBehaviour";
 import { Renderer } from "../GameEngine/Core/renderer";
 import { Vector2 } from "../GameEngine/Types/HelperTypes";
+import AutoDestroyBehaviour from "./AutoDestroy";
 
 export default class EnemySpawnerBehaviour extends GameObjectBehaviour {
   public spawnInterval: number; // Time in milliseconds
@@ -52,6 +53,7 @@ export default class EnemySpawnerBehaviour extends GameObjectBehaviour {
 
     const enemyBehaviours: GameObjectBehaviour[] = [
       new CircleRenderer({ x: 0, y: 0 }, this.enemyRadius, this.enemyColor),
+      new AutoDestroyBehaviour(6),
       // TODO: Add other enemy behaviours here (e.g., movement, health)
     ];
 
